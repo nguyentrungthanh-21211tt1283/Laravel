@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PricingController
+class Order_ItemController
 {
     /**
      * Display a listing of the resource.

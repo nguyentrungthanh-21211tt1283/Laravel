@@ -9,6 +9,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
         // Global HTTP middleware stack
         \App\Http\Middleware\TrustProxies::class,
+        \Illuminate\Http\Middleware\HandleCors::class, //
         \Fruitcake\Cors\HandleCors::class,
         \Illuminate\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -25,8 +26,10 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Fruitcake\Cors\HandleCors::class,
         ],
     ];
 

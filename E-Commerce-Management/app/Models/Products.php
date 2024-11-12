@@ -20,7 +20,7 @@ class Products extends Model
      */
 
     protected $fillable = [
-        'id_category',
+        'id_categorie',
         'name_product',
         'description_product',
         'price_product',
@@ -33,7 +33,7 @@ class Products extends Model
         return $this->belongsTo(Promotions::class,'product_promotion');
     }
     public function category(){
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Category::class);
     }
     public function order_Items(){
         return $this->hasMany(Order_Items::class);

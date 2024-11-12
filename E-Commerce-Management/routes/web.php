@@ -1,38 +1,24 @@
 <?php
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\CustomersController;
-use App\Http\Controllers\PromotionsController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-//Sản phẩm
-Route::get('/products', [ProductsController::class, 'index']);
-Route::post('/products', [ProductsController::class, 'addProduct']);
-Route::get('/products/{id}', [ProductsController::class, 'detailProduct']);
-Route::put('/products/{id}', [ProductsController::class, 'updateProduct']);
-Route::delete('/products/{id}', [ProductsController::class, 'deleteProduct']);
-
-//Đơn hàng
-Route::get('/orders', [OrdersController::class, 'index']);
-Route::post('/orders', [OrdersController::class, 'store']);
-Route::get('/orders/{id}', [OrdersController::class, 'show']);
-Route::put('/orders/{id}', [OrdersController::class, 'update']);
-Route::delete('/orders/{id}', [OrdersController::class, 'destroy']);
-
-//Khách hàng
-Route::get('/customers', [CustomersController::class, 'index']);
-Route::post('/customers', [CustomersController::class, 'store']);
-Route::get('/customers/{id}', [CustomersController::class, 'show']);
-Route::put('/customers/{id}', [CustomersController::class, 'update']);
-Route::delete('/customers/{id}', [CustomersController::class, 'destroy']);
-
-//Khuyến mãi
-Route::get('/promotions', [PromotionsController::class, 'index']);
-Route::post('/promotions', [PromotionsController::class, 'store']);
-Route::get('/promotions/{id}', [PromotionsController::class, 'show']);
-Route::put('/promotions/{id}', [PromotionsController::class, 'update']);
-Route::delete('/promotions/{id}', [PromotionsController::class, 'destroy']);
+Route::prefix('api')->middleware('api')->group(function () {
+    // Routte  Categorie API:
+    Route::get('categories', [CategoryController::class, 'index']);
+    Route::post('categories', [CategoryController::class, 'store']);
+    Route::put('categories/{id}', [CategoryController::class, 'update']);
+    Route::get('categories/{id}', [CategoryController::class, 'show']);
+    Route::delete('categories/{id}', [CategoryController::class, 'destroy']);
+    // Routte  Product API:
+    Route::get('products', [ProductController::class, 'index']);
+    Route::post('products', [ProductController::class, 'store']);
+    Route::put('products/{id}', [ProductController::class, 'update']);
+    Route::get('products/{id}', [ProductController::class, 'show']);
+    Route::delete('products/{id}', [ProductController::class, 'destroy']);
+});
